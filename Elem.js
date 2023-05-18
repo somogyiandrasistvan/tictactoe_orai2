@@ -1,8 +1,8 @@
 /**megjelenít egyetlen elemet */
 class Elem {
-  #index;
+  index;
   constructor( index,szuloElem) {
-    this.#index = index;
+    this.index = index;
     szuloElem.append("<div class='elem'><p></p></div>");
     //megfogom a html elemeket
     this.divElem = $("article div:last-child");
@@ -18,7 +18,7 @@ class Elem {
     });
   }
   getIndex() {
-    return this.#index;
+    return this.index;
   }
   setElem(adat) {
     this.pElem.html(adat);

@@ -1,10 +1,9 @@
 import Elem from "./Elem.js";
 class Jatekter {
-    #lepes;
-    #lista = [];
+    lepes;
     constructor() {
-        this.#lepes = 0;
-        this.#lista = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
+        this.lepes = 0;
+        this.lista = [" ", " ", " ", " ", " ", " ", " ", " ", " "];
         const szuloElem = $("article");
         for (let index = 0; index < 9; index++) {
             const elem = new Elem(index, szuloElem);
@@ -19,17 +18,17 @@ class Jatekter {
         $(window).on("elemKattintas", (event) => {
             console.log(event.detail);
             let aktElem = event.detail;
-            if (this.#lepes % 2 === 0) {
+            if (this.lepes % 2 === 0) {
                 aktElem.setElem("X");
-                this.#lista[aktElem.getIndex()] = "X";
+                this.lista[aktElem.getIndex()] = "X";
             } else {
                 aktElem.setElem("O");
-                this.#lista[aktElem.getIndex()] = "O";
+                this.lista[aktElem.getIndex()] = "O";
             }
-            this.#lepes++;
-            let allapot = this.#ellenorzes();
-            console.log(this.#lepes);
-            if (this.#lepes === 9) {
+            this.lepes++;
+            let allapot = this.ellenorzes();
+            console.log(this.lepes);
+            if (this.lepes === 9) {
                 if (allapot === "") {
                     console.log("A játéknak vége! Döntetlen!");
                 } else {
@@ -44,10 +43,10 @@ class Jatekter {
         });
     }
 
-    #getVizszintes() {
+    getVizszintes() {
         let ellX = "";
 
-        this.#lista.forEach((element, index) => {
+        this.lista.forEach((element, index) => {
             ellX += element;
             if (index % 3 == 2) {
                 ellX += "@";
@@ -56,13 +55,13 @@ class Jatekter {
         console.log(ellX);
         return ellX;
     }
-    #getFuggoleges() {
+    getFuggoleges() {
         let ellY = "";
         for (let index = 0; index < 3; index++) {
             ellY +=
-                this.#lista[index] +
-                this.#lista[index + 3] +
-                this.#lista[index + 6];
+                this.lista[index] +
+                this.lista[index + 3] +
+                this.lista[index + 6];
 
             ellY += "@";
         }
@@ -70,21 +69,21 @@ class Jatekter {
         return ellY;
     }
 
-    #getAtlo() {
-        let ell = this.#lista[0] + this.#lista[4] + this.#lista[8] + "@";
-        ell += this.#lista[2] + this.#lista[4] + this.#lista[6];
+    getAtlo() {
+        let ell = this.lista[0] + this.lista[4] + this.lista[8] + "@";
+        ell += this.lista[2] + this.lista[4] + this.lista[6];
 
         return ell;
     }
 
-    #ellenorzes() {
-        console.log(this.#lista);
+    ellenorzes() {
+        console.log(this.lista);
         let ell =
-            this.#getVizszintes() +
+            this.getVizszintes() +
             "@" +
-            this.#getAtlo() +
+            this.getAtlo() +
             "@" +
-            this.#getFuggoleges();
+            this.getFuggoleges();
         let allapot = "";
         console.log(ell);
         if (ell.indexOf("XXX") >= 0) {
